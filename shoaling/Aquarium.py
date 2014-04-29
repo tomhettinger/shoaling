@@ -118,7 +118,7 @@ class Aquarium:
 
             # Draw new window to the screen.
             pygame.display.update()
-            fpsClock.tick(45)   # Wait long enough so fps <= 30.
+            fpsClock.tick(30)   # Wait long enough so fps <= 30.
 
 
 if __name__ == "__main__":

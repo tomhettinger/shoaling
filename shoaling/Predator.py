@@ -9,7 +9,7 @@ ZONE_OF_REPULSION = 100
 
 HUNGER_CONST = -10.0
 WALL_CONST = 2.0
-REPULSIVE_CONST = -3.0
+REPULSIVE_CONST = 20.0
 
 
 class Predator(Fish):
@@ -20,8 +20,8 @@ class Predator(Fish):
         Fish.__init__(self, rect, color)
         Predator.count += 1
         self.predatorID = Predator.count
-        self.MAX_SPEED_X = 2.5
-        self.MAX_SPEED_Y = 2.5
+        self.MAX_SPEED_X = 4.0
+        self.MAX_SPEED_Y = 4.0
 
     def calc_prey_forces(self, preyList):
         """Calculate the force of running away from predators."""
