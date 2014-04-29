@@ -1,8 +1,6 @@
-import pygame
-import numpy as np
+from math import sqrt
 
 from Fish import Fish
-
 
 ZONE_OF_REPULSION = 50
 ZONE_OF_ALIGNMENT = 100
@@ -21,7 +19,7 @@ class Prey(Fish):
     """This is the Fish Sprite that will move around the aquarium. y-axis points DOWN"""
     count = 0
 
-    def __init__(self, rect=None, color=pygame.Color(255, 255, 255), deathSound=None):
+    def __init__(self, rect=None, color=None, deathSound=None):
         Fish.__init__(self, rect, color, deathSound)
         Prey.count += 1
         self.preyID = Prey.count
@@ -39,7 +37,7 @@ class Prey(Fish):
                 continue
             dx = self.rect[0] - predator.rect[0]
             dy = self.rect[1] - predator.rect[1]
-            r = np.sqrt(dx**2 + dy**2)
+            r = sqrt(dx**2 + dy**2)
             if r > ZONE_OF_FEAR or r == 0:
                 continue
             F_x += FEAR_CONST * (dx / r)
@@ -60,7 +58,7 @@ class Prey(Fish):
                 continue
             dx = self.rect[0] - fish.rect[0]
             dy = self.rect[1] - fish.rect[1]
-            r = np.sqrt(dx**2 + dy**2)
+            r = sqrt(dx**2 + dy**2)
             if r > ZONE_OF_ATTRACTION or r <= ZONE_OF_REPULSION:
                 continue
             F_x += (ATTRACTIVE_CONST / r) * (dx / r)
@@ -79,7 +77,7 @@ class Prey(Fish):
                 continue
             dx = self.rect[0] - fish.rect[0]
             dy = self.rect[1] - fish.rect[1]
-            r = np.sqrt(dx**2 + dy**2)
+            r = sqrt(dx**2 + dy**2)
             if r == 0 or r > ZONE_OF_REPULSION:
                 continue
             F_x += (REPULSIVE_CONST / r) * (dx / r)
@@ -100,7 +98,7 @@ class Prey(Fish):
                 continue
             dx = self.rect[0] - fish.rect[0]
             dy = self.rect[1] - fish.rect[1]
-            r = np.sqrt(dx**2 + dy**2)
+            r = sqrt(dx**2 + dy**2)
             if r < ZONE_OF_REPULSION or r > ZONE_OF_ALIGNMENT:
                 continue
             F_x += fish.xVel * (ALIGNMENT_CONST / r)

@@ -1,5 +1,4 @@
-import pygame
-import numpy as np
+from math import sqrt
 
 from Fish import Fish
 
@@ -16,7 +15,7 @@ class Predator(Fish):
     """This is the Predator that will move around the aquarium. y-axis points DOWN"""
     count = 0
 
-    def __init__(self, rect=None, color=pygame.Color(0, 255, 0), deathSound=None):
+    def __init__(self, rect=None, color=None, deathSound=None):
         Fish.__init__(self, rect, color, deathSound)
         Predator.count += 1
         self.predatorID = Predator.count
@@ -35,7 +34,7 @@ class Predator(Fish):
                 continue
             dx = self.rect[0] - fish.rect[0]
             dy = self.rect[1] - fish.rect[1]
-            r = np.sqrt(dx**2 + dy**2)
+            r = sqrt(dx**2 + dy**2)
             if r > VISION or r == 0:
                 continue
             else:
@@ -55,7 +54,7 @@ class Predator(Fish):
                 continue
             dx = self.rect[0] - fish.rect[0]
             dy = self.rect[1] - fish.rect[1]
-            r = np.sqrt(dx**2 + dy**2)
+            r = sqrt(dx**2 + dy**2)
             if r > ZONE_OF_REPULSION:
                 continue
             if r == 0:

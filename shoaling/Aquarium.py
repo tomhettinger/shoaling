@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import sys
+from random import random
 
-from numpy.random import random as random
 import pygame
 from pygame.locals import *
 
@@ -42,11 +42,11 @@ class Aquarium:
         """Load all of the fish sprites."""
         self.predator_group = pygame.sprite.Group()
         for i in range(NUMBER_OF_PREDATORS):
-            self.predator_group.add(Predator.Predator(rect=pygame.Rect(random()*self.width, random()*self.height, 30, 30)))
+            self.predator_group.add(Predator.Predator(rect=pygame.Rect(random()*self.width, random()*self.height, 30, 30), color=greenColor))
         
         self.prey_group = pygame.sprite.Group()
         for i in range(NUMBER_OF_PREY):
-            self.prey_group.add(Prey.Prey(rect=pygame.Rect(random()*self.width, random()*self.height, 10, 10), deathSound=self.chewSound))
+            self.prey_group.add(Prey.Prey(rect=pygame.Rect(random()*self.width, random()*self.height, 10, 10), deathSound=self.chewSound, color=whiteColor))
         for i in range(NUMBER_OF_PREY):
             self.prey_group.add(Prey.Prey(rect=pygame.Rect(random()*self.width, random()*self.height, 10, 10), deathSound=self.chewSound, color=redColor))
 
