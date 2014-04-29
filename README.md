@@ -23,7 +23,11 @@ $ shoaling
 Forces can be adjusted in real time by using:
 
 `q`/`a` - Fish attraction force +/-
+
 `w`/`s` - Fish anti-crowding force +/-
+
 `e`/`d` - Fish alignment force +/-
+
 `r`/`f` - Wall boundary force +/-
+
 `t`/`g` - Fear of predators force +/-
