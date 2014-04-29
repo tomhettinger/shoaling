@@ -9,15 +9,15 @@ ZONE_OF_REPULSION = 100
 
 HUNGER_CONST = -10.0
 WALL_CONST = 2.0
-REPULSIVE_CONST = 20.0
+REPULSIVE_CONST = 40.0
 
 
 class Predator(Fish):
     """This is the Predator that will move around the aquarium. y-axis points DOWN"""
     count = 0
 
-    def __init__(self, rect=None, color=pygame.Color(0, 255, 0)):
-        Fish.__init__(self, rect, color)
+    def __init__(self, rect=None, color=pygame.Color(0, 255, 0), deathSound=None):
+        Fish.__init__(self, rect, color, deathSound)
         Predator.count += 1
         self.predatorID = Predator.count
         self.MAX_SPEED_X = 4.0

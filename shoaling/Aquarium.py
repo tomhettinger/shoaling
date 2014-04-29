@@ -12,9 +12,10 @@ redColor = pygame.Color(255, 0, 0)
 greenColor = pygame.Color(0, 255, 0)
 blueColor = pygame.Color(0, 0, 255)
 whiteColor = pygame.Color(255, 255, 255)
+blackColor = pygame.Color(0, 0, 0)
 
 NUMBER_OF_PREY = 13
-NUMBER_OF_PREDATORS = 2
+NUMBER_OF_PREDATORS = 1
 
 class Aquarium:
     """This is the main class for creating the aquarium used for visualization of the fish."""
@@ -26,6 +27,15 @@ class Aquarium:
         self.height = height
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption('Aquarium')
+        self.chewSound = pygame.mixer.Sound('./chew.wav')
+
+    def draw_direction_line(self, fish):
+        """Given a fish sprite, draw a line of motion using xVel and yVel."""
+        startX = fish.rect[0]
+        startY = fish.rect[1]
+        endX = (fish.rect[0] + 2*fish.xVel)
+        endY = (fish.rect[1] + 2*fish.yVel)
+        pygame.draw.line(self.screen, blackColor, (startX, startY), (endX, endY), 3)
 
 
     def load_sprites(self):
@@ -36,10 +46,9 @@ class Aquarium:
         
         self.prey_group = pygame.sprite.Group()
         for i in range(NUMBER_OF_PREY):
-            self.prey_group.add(Prey.Prey(rect=pygame.Rect(random()*self.width, random()*self.height, 10, 10)))
+            self.prey_group.add(Prey.Prey(rect=pygame.Rect(random()*self.width, random()*self.height, 10, 10), deathSound=self.chewSound))
         for i in range(NUMBER_OF_PREY):
-            self.prey_group.add(Prey.Prey(rect=pygame.Rect(random()*self.width, random()*self.height, 10, 10),
-                                color=pygame.Color(255, 0, 0)))
+            self.prey_group.add(Prey.Prey(rect=pygame.Rect(random()*self.width, random()*self.height, 10, 10), deathSound=self.chewSound, color=redColor))
 
     def main_loop(self):
         """The main loop for drawing into the Aquarium."""
@@ -51,16 +60,23 @@ class Aquarium:
             self.predator_group.draw(self.screen)
             self.prey_group.draw(self.screen)
 
-            # Update the fish positions
+            # Update the fish velocities
             for predator in self.predator_group.sprites():
                 predator.update_velocity(aquarium=self)
             for prey in self.prey_group.sprites():
                 prey.update_velocity(aquarium=self)
+
             # Move fish                
             for predator in self.predator_group.sprites():
                 predator.swim(aquarium=self)                
             for prey in self.prey_group.sprites():
                 prey.swim(aquarium=self)
+
+            # Draw direction arrows
+            for predator in self.predator_group.sprites():
+                self.draw_direction_line(predator)
+            for fish in self.prey_group.sprites():
+                self.draw_direction_line(fish)
 
             # Check for all colisions among predators and fish
             spriteHitList = pygame.sprite.groupcollide(self.predator_group, self.prey_group, False, True, collided=physics.fish_collision)

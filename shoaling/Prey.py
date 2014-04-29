@@ -21,8 +21,8 @@ class Prey(Fish):
     """This is the Fish Sprite that will move around the aquarium. y-axis points DOWN"""
     count = 0
 
-    def __init__(self, rect=None, color=pygame.Color(255, 255, 255)):
-        Fish.__init__(self, rect, color)
+    def __init__(self, rect=None, color=pygame.Color(255, 255, 255), deathSound=None):
+        Fish.__init__(self, rect, color, deathSound)
         Prey.count += 1
         self.preyID = Prey.count
         self.MAX_SPEED_X = 9.0

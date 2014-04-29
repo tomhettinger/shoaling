@@ -10,7 +10,7 @@ class Fish(pygame.sprite.Sprite):
     """This is the Fish Sprite that will move around the aquarium. y-axis points DOWN"""
     count = 0
 
-    def __init__(self, rect=None, color=None):
+    def __init__(self, rect=None, color=None, deathSound=None):
         pygame.sprite.Sprite.__init__(self)
         
         Fish.count += 1
@@ -30,6 +30,7 @@ class Fish(pygame.sprite.Sprite):
             self.image.fill(self.color)
             self.rect = self.image.get_rect()
         
+        self.deathSound=deathSound
         self.blindFOV = 0.5
         self.blindLeft = np.pi - self.blindFOV/2.
         self.blindRight = np.pi + self.blindFOV/2.
@@ -38,6 +39,11 @@ class Fish(pygame.sprite.Sprite):
         self.MAX_SPEED_Y = 6.0
         self.xVel = self.MAX_SPEED_X*np.cos(initialDirection)
         self.yVel = self.MAX_SPEED_Y*np.sin(initialDirection)
+
+
+    def __del__(self):
+        if self.deathSound is not None:
+            self.deathSound.play()
 
 
     def calc_orientation(self):
