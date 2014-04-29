@@ -7,13 +7,13 @@ config = {
     'description': 'Fish shoaling simulation.',
     'author': 'Thomas Hettinger',
     'url': 'https://github.com/tomhettinger/shoaling',
-    'download_url': 'Where to download it.',
     'author_email': 'tomhettinger@gmail.com',
-    'version': '0.1',
+    'version': '1.0',
     'install_requires': ['nose', 'pygame'],
     'packages': ['shoaling'],
-    'scripts': [],
-    'name': 'shoaling'
+    'scripts': ['bin/shoaling'],
+    'name': 'shoaling',
+    'license':'LICENSE'
 }
 
 setup(**config)

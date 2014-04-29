@@ -137,6 +137,9 @@ class Aquarium:
             fpsClock.tick(30)   # Wait long enough so fps <= 30.
 
 
-if __name__ == "__main__":
+def main():
     aquarium = Aquarium()
     aquarium.main_loop()
+
+if __name__ == "__main__":
+    main()
