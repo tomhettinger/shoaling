@@ -5,7 +5,9 @@ shoaling
 
 `shoaling` A graphical simulation for shoaling fish and their reactions to the environment (walls, fish, predators). Fish move in shoals by moving towards similar fish within a radius of vision, moving away from fish that are too close, and moving the same direction as fish close by.
 
-For a video demonstration, see https://www.youtube.com/watch?v=IZJPUrxL9H0&feature=youtu.be
+Click to see demo:
+[![yt screenshot](https://raw.githubusercontent.com/tomhettinger/shoaling/master/video/yt_screenshot.png)](http://youtu.be/IZJPUrxL9H0)
+
 
 ## Installation
 
